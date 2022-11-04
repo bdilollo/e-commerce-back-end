@@ -90,13 +90,18 @@ router.put('/:id', (req, res) => {
       res.status(400).json(err);
     });
   });
-  
+
 router.delete('/:id', async (req, res) => {
   try {
     // delete one tag by its `id` value
     await Tag.destroy({
       where: {
         id: req.params.id
+      }
+    });
+    await ProductTag.destroy({
+      where: {
+        tag_id: req.params.id 
       }
     });
     // send new list (showing tag has been deleted)

@@ -113,6 +113,11 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id
       }
     });
+    await ProductTag.destroy({
+      where: {
+        product_id: req.params.id
+      }
+    });
     // send new list (showing product has been deleted)
     const newProductList = await Product.findAll();
     res.status(200).json(newProductList);
